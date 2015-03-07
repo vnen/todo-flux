@@ -5,9 +5,13 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.Router.extend({
   initialize: function () {
-    this.route('*notfound', 'notFound');
-    this.route('', 'home');
-    this.route('/', 'home');
+    this.makeRoute('*notfound', 'notFound');
+    this.makeRoute('', 'home');
+    this.makeRoute('/', 'home');
+  },
+  makeRoute: function (path, name) {
+    var handler = this[name]();
+    this.route(path, name, handler.render.bind(handler));
   },
   home: function () {
     return new Route(HomeComponent);
