@@ -62,7 +62,8 @@
     "koa-router": "^4.2.0",
     "koa-static-cache": "^3.0.1",
     "react": "^0.12.2",
-    "superagent": "^0.21.0"
+    "superagent": "^0.21.0",
+    "underscore": "^1.8.2"
   },
   "browser": {
     "./config/index.js": "./config/browser.js"
