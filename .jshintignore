@@ -1,0 +1,5 @@
+node_modules
+coverage
+scripts
+public/js/app.js
+.*
