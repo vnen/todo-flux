@@ -10,7 +10,7 @@ module.exports = {
       mainRouter.on('route', function (route) {
         fs.readFile(path.join(process.cwd(), 'assets/index.html'), 'utf8', function (err, content) {
           if (err) { return callback(err); }
-          var rendered = content.replace('---Markup---', mainRouter[route]());
+          var rendered = content.replace('---Markup---', mainRouter[route]().render());
           callback(null, rendered);
         });
       });

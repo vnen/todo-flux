@@ -1,4 +1,6 @@
-var Backbone = require('backbone');
+var Backbone = require('backbone'),
+    Route = require('../../lib/route'),
+    HomeComponent = require('../components/home.jsx');
 
 module.exports = Backbone.Router.extend({
   initialize: function () {
@@ -6,6 +8,6 @@ module.exports = Backbone.Router.extend({
     this.route('/', 'home');
   },
   home: function () {
-    return 'Hello world';
+    return new Route(HomeComponent);
   }
 });
