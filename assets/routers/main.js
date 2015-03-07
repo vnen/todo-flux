@@ -13,6 +13,9 @@ module.exports = Backbone.Router.extend({
     this.makeRoute('list', 'list');
   },
   makeRoute: function (path, name) {
+    if (typeof window === 'undefined') {
+      this.route(path, name, function dummy() {} );
+    }
     var handler = this[name]();
     this.route(path, name, handler.render.bind(handler));
   },
