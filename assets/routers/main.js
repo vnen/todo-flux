@@ -13,10 +13,10 @@ module.exports = Backbone.Router.extend({
     this.makeRoute('list', 'list');
   },
   makeRoute: function (path, name) {
-    if (typeof window === 'undefined') {
-      this.route(path, name, function dummy() {} );
-    }
     var handler = this[name]();
+    if (typeof window === 'undefined') {
+      return this.route(path, name, function dummy() {} );
+    }
     this.route(path, name, handler.render.bind(handler));
   },
   home: function () {

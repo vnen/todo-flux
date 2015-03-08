@@ -37,10 +37,9 @@ module.exports = {
       callback(err, bootstrap);
     });
     _.each(route.collections, function (collection, name) {
-      var col = new collection();
-      col.fetch({
+      collection.fetch({
         success: function () {
-          bootstrap[name] = col.toJSON();
+          bootstrap[name] = collection.toJSON();
           after();
         },
         error: function (xhr, error, e) {
