@@ -1,5 +1,16 @@
 var React = require('react'),
-    ListComponent;
+    ListComponent,
+    ItemComponent;
+
+ItemComponent = React.createClass({
+  render: function () {
+    var attr = this.props.model.attributes,
+      check = attr.done ? '\u2611' : '\u2610';
+    return (
+      <li key={attr.id}>{check + ' ' + attr.task}</li>
+    );
+  }
+});
 
 ListComponent = React.createClass({
   componentDidMount: function () {
@@ -13,7 +24,7 @@ ListComponent = React.createClass({
   },
   render: function () {
     var list = this.props.collections.todos.map(function (item) {
-      return <li key={item.id}>{item.task}</li>;
+      return <ItemComponent model={item} />;
     });
     return (
       <main>
