@@ -15,11 +15,16 @@ module.exports = {
       mainRouter.on('route', function (route) {
         fs.readFile(path.join(process.cwd(), 'assets/index.html'), 'utf8', function (err, template) {
           if (err) { return callback(err); }
-          var rendered = template.replace('---Markup---', mainRouter[route]().render());
+          var rendered = this.render(template, mainRouter[route]().render());
           callback(null, rendered);
-        });
-      });
+        }.bind(this));
+      }.bind(this));
       Backbone.history.loadUrl(context.req.url);
-    };
+    }.bind(this);
+  },
+
+  render: function (template, markup, data) {
+    var rendered = template.replace('---Markup---', markup);
+    return rendered.replace('---BOOTSTRAP---', data || 'null');
   }
 };
