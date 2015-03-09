@@ -4,14 +4,12 @@ var React = require('react'),
     AppComponent;
 
 AppComponent = React.createClass({
-  componentWillMount: function () {
+  render: function () {
     if (this.props.collections) {
       _.each(this.props.collections, function (collection) {
         collection.bootstrap();
       }, this);
     }
-  },
-  render: function () {
     return (
       <div>
         <HeaderComponent />

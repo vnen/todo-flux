@@ -3,8 +3,7 @@ var Backbone = require('backbone'),
     MainRouter = require('./routers/main'),
     fs = require('fs'),
     path = require('path'),
-    najax = require('../lib/najax'),
-    bootstrap = require('./bootstrap');
+    najax = require('../lib/najax');
 
 Backbone.ajax = function (options) {
   najax(options);
@@ -41,8 +40,7 @@ module.exports = {
       collection.fetch({
         success: function () {
           var name = collection.name;
-          bootstrap[name] = collection.toJSON();
-          data[name] = bootstrap[name];
+          data[name] = collection.toJSON();
           after();
         },
         error: function (xhr, error, e) {

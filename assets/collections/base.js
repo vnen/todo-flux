@@ -1,6 +1,5 @@
 /*globals BOOTSTRAP:true */
 var Backbone = require('backbone'),
-    bootstrap = require('../bootstrap'),
     BaseCollection;
 
 module.exports = BaseCollection = Backbone.Collection.extend({
@@ -9,16 +8,17 @@ module.exports = BaseCollection = Backbone.Collection.extend({
   },
   path: '',
   bootstrap: function () {
-    if (typeof window === 'undefined') {
-      this.reset(bootstrap[this.name]);
-    } else {
-      if (typeof BOOTSTRAP !== 'undefined' && BOOTSTRAP && BOOTSTRAP[this.name]) {
+    if (typeof window !== 'undefined') {
+      this.off('reset add remove', this.updateCache, this);
+      this.on('reset add remove', this.updateCache, this);
+      if (typeof BOOTSTRAP !== 'undefined' && BOOTSTRAP && typeof BOOTSTRAP[this.name] !== 'undefined') {
         return this.reset(BOOTSTRAP[this.name]);
       }
-      this.on('reset add remove', function () {
-        BOOTSTRAP = BOOTSTRAP || {};
-        BOOTSTRAP[this.name] = this.toJSON();
-      }, this);
+      this.fetch({ reset: true });
     }
+  },
+  updateCache: function () {
+    BOOTSTRAP = BOOTSTRAP || {};
+    BOOTSTRAP[this.name] = this.toJSON();
   }
 });
