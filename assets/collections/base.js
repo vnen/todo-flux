@@ -13,7 +13,7 @@ module.exports = BaseCollection = Backbone.Collection.extend({
       this.reset(bootstrap[this.name]);
     } else {
       if (typeof BOOTSTRAP !== 'undefined' && BOOTSTRAP && BOOTSTRAP[this.name]) {
-        return this.reset(bootstrap[this.name]);
+        return this.reset(BOOTSTRAP[this.name]);
       }
       this.on('reset add remove', function () {
         BOOTSTRAP = BOOTSTRAP || {};
