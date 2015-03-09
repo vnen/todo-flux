@@ -18,9 +18,9 @@ module.exports = {
         fs.readFile(path.join(process.cwd(), 'assets/index.html'), 'utf8', function (err, template) {
           if (err) { return callback(err); }
           var route = mainRouter[routeName]();
-          this.bootstrap(route, function (err) {
+          this.bootstrap(route, function (err, data) {
             if (err) { return callback(err); }
-            var rendered = this.render(template, route.render());
+            var rendered = this.render(template, data, route.render());
             callback(null, rendered);
           }.bind(this));
         }.bind(this));
@@ -30,16 +30,19 @@ module.exports = {
   },
 
   bootstrap: function (route, callback) {
+    var data = {};
     if (!route.collections || _.size(route.collections === 0)) {
-      callback(null);
+      callback(null, data);
     }
     var err = null, after = _.after(_.size(route.collections), function () {
-      callback(err, bootstrap);
+      callback(err, data);
     });
-    _.each(route.collections, function (collection, name) {
+    _.each(route.collections, function (collection) {
       collection.fetch({
         success: function () {
+          var name = collection.name;
           bootstrap[name] = collection.toJSON();
+          data[name] = bootstrap[name];
           after();
         },
         error: function (xhr, error, e) {
@@ -50,8 +53,8 @@ module.exports = {
     });
   },
 
-  render: function (template, markup) {
+  render: function (template, data, markup) {
     var rendered = template.replace('---Markup---', markup);
-    return rendered.replace('---BOOTSTRAP---', JSON.stringify(bootstrap));
+    return rendered.replace('---BOOTSTRAP---', JSON.stringify(data));
   }
 };
