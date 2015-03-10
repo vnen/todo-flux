@@ -1,5 +1,6 @@
 var api = require('koa')(),
     router = require('koa-router')(),
+    delay = require('koa-delay'),
     todos = require('./todos'),
     auth = require('../auth/verify');
 
@@ -8,6 +9,8 @@ router.get('/todos/:id', todos.getOne);
 router.delete('/todos/:id', todos.delete);
 
 api.use(auth);
+
+api.use(delay(1000, 1000));
 
 api.use(router.routes());
 api.use(router.allowedMethods());
