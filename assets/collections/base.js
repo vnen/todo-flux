@@ -9,7 +9,7 @@ module.exports = BaseCollection = Backbone.Collection.extend({
   },
   path: '',
   initialize: function () {
-    Dispatcher.register(this.dispatchCallback);
+    Dispatcher.register(this.dispatchCallback.bind(this));
   },
   bootstrap: function () {
     if (typeof window !== 'undefined') {
@@ -25,7 +25,5 @@ module.exports = BaseCollection = Backbone.Collection.extend({
     BOOTSTRAP = BOOTSTRAP || {};
     BOOTSTRAP[this.name] = this.toJSON();
   },
-  dispatchCallback: function dummy() {
-
-  }
+  dispatchCallback: function dummy() { }
 });
