@@ -9,6 +9,11 @@ var _ = require('underscore'),
         id: 2,
         task: 'Do something else',
         done: false
+      },
+      {
+        id: 3,
+        task: 'Do something other',
+        done: false
       }
     ];
 
@@ -28,7 +33,15 @@ function *getSingleTodo() {
   }
 }
 
+function *deleteTodo() {
+  this.status = 500;
+  this.body = {
+    error: 'not implemented'
+  };
+}
+
 module.exports = {
   getAll: getTodos,
-  getOne: getSingleTodo
+  getOne: getSingleTodo,
+  delete: deleteTodo
 };
