@@ -1,4 +1,5 @@
 var BaseCollection = require('./base'),
+    _ = require('underscore'),
     TodoConstants = require('../constants/todos'),
     TodosCollection;
 
@@ -26,7 +27,11 @@ module.exports = TodosCollection = BaseCollection.extend({
       case TodoConstants.saveTodo: {
         todo = this.findWhere({ id: payload.todo.get('id') });
         if (todo) {
-          todo.save(payload.todo.attributes, payload.options || {});
+          todo.save(payload.todo.attributes, _.extend(payload.options, {
+            error: function () {
+              todo.set(todo.previousAttributes());
+            }
+          }));
         }
         break;
       }
