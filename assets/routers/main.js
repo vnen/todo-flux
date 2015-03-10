@@ -28,6 +28,8 @@ module.exports = Backbone.Router.extend({
     });
   },
   notFound: function () {
-    return new Route(ErrorComponents.Error404Component);
+    var route = new Route(ErrorComponents.Error404Component);
+    route.status = 404;
+    return route;
   }
 });

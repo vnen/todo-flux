@@ -20,6 +20,9 @@ module.exports = {
           this.bootstrap(route, function (err, data) {
             if (err) { return callback(err); }
             var rendered = this.render(template, data, route.render());
+            if (route.status) {
+              context.status = route.status;
+            }
             callback(null, rendered);
           }.bind(this));
         }.bind(this));
