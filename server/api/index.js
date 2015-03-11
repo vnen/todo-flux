@@ -10,7 +10,7 @@ router.delete('/todos/:id', todos.delete);
 
 api.use(auth);
 
-api.use(delay(1000, 1000));
+api.use(delay(200, 200));
 
 api.use(router.routes());
 api.use(router.allowedMethods());
