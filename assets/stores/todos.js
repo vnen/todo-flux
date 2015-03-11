@@ -1,10 +1,4 @@
-var $ = require('jquery'),
-    TodoCollection = require('../collections/todos'),
-    TodosStore = module.exports = new TodoCollection();
+var TodoCollection = require('../collections/todos'),
+    TodosStore;
 
-if (typeof window !== 'undefined') {
-  $(function () {
-    console.log('bootstrapping');
-    TodosStore.bootstrap();
-  });
-}
+module.exports = TodosStore = new TodoCollection();

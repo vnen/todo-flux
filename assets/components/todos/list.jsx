@@ -46,6 +46,9 @@ ItemComponent = React.createClass({
 });
 
 ListComponent = React.createClass({
+  componentWillMount: function () {
+    TodosStore.bootstrap();
+  },
   componentDidMount: function () {
     TodosStore.on('add remove reset sync', function () {
       this.forceUpdate();

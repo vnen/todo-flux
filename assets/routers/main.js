@@ -22,7 +22,7 @@ module.exports = Backbone.Router.extend({
     return new Route(HomeComponent);
   },
   list: function () {
-    return new Route(TodosListComponent);
+    return new Route(TodosListComponent, {}, ['todos']);
   },
   notFound: function () {
     var route = new Route(ErrorComponents.Error404Component);

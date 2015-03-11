@@ -16,7 +16,6 @@ module.exports = BaseCollection = Backbone.Collection.extend({
   },
   bootstrap: function () {
     if (typeof window !== 'undefined') {
-      console.log('bootstrapping in');
       this.off(null, this.updateCache, this);
       this.on('reset add remove destroy sync', this.updateCache, this);
       if (typeof BOOTSTRAP !== 'undefined' && BOOTSTRAP && typeof BOOTSTRAP[this.name] !== 'undefined') {
