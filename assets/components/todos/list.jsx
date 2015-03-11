@@ -8,9 +8,12 @@ ItemComponent = React.createClass({
     this.props.model.on('change:done', function (e) {
       this.setState({ done: e.get('done') });
     }, this);
-    this.props.model.on('error', function () {
-      this.setState({ errorText: 'Server error' });
+    this.props.model.on('saveError deleteError', function (model, response) {
+      this.setError(response.error);
     }, this);
+  },
+  setError: function (text) {
+    this.setState({ errorText: text });
   },
   componentWillUnmount: function () {
     this.props.model.off(null, null, this);

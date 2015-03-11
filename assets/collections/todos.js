@@ -19,6 +19,7 @@ module.exports = TodosCollection = BaseCollection.extend({
           todo.destroy({
             error: function () {
               this.add(todo);
+              todo.trigger('deleteError', todo, { error: 'Error on delete' });
             }.bind(this)
           });
         }
@@ -30,6 +31,7 @@ module.exports = TodosCollection = BaseCollection.extend({
           todo.save(payload.todo.attributes, _.extend(payload.options, {
             error: function () {
               todo.set(todo.previousAttributes());
+              todo.trigger('saveError', todo, { error: 'Error on save' });
             }
           }));
         }
