@@ -11,6 +11,9 @@ module.exports = BaseCollection = Backbone.Collection.extend({
   initialize: function () {
     Dispatcher.register(this.dispatchCallback.bind(this));
   },
+  comparator: function (model) {
+    return model.get('id');
+  },
   bootstrap: function () {
     if (typeof window !== 'undefined') {
       this.off(null, this.updateCache, this);
