@@ -7,15 +7,17 @@ module.exports = TodosCollection = BaseCollection.extend({
   name: 'todos',
   path: '/todos',
   dispatchCallback: function (payload) {
-    var todo;
+    var todo = payload.todo,
+        index = this.indexOf(todo);
+
     switch (payload.actionType) {
       case TodoConstants.addTodo: {
-        this.add(payload.todo);
+        this.add(todo);
         break;
       }
       case TodoConstants.removeTodo: {
-        todo = this.findWhere({ id: payload.todo.get('id') });
-        if (todo) {
+        // Only if in this collection
+        if (index >= 0) {
           todo.destroy({
             error: function () {
               this.add(todo);
@@ -26,8 +28,8 @@ module.exports = TodosCollection = BaseCollection.extend({
         break;
       }
       case TodoConstants.saveTodo: {
-        todo = this.findWhere({ id: payload.todo.get('id') });
-        if (todo) {
+        // Only if in this collection
+        if (index >= 0) {
           todo.save(payload.todo.attributes, _.extend(payload.options, {
             error: function () {
               todo.set(todo.previousAttributes());
