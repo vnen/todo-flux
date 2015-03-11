@@ -1,5 +1,6 @@
 var React = require('react'),
     TodoActions = require('../../actions/todos'),
+    TodosStore = require('../../stores/todos'),
     ListComponent,
     ItemComponent;
 
@@ -46,15 +47,15 @@ ItemComponent = React.createClass({
 
 ListComponent = React.createClass({
   componentDidMount: function () {
-    this.props.collections.todos.on('add remove reset sync', function () {
+    TodosStore.on('add remove reset sync', function () {
       this.forceUpdate();
     }, this);
   },
   componentWillUnmount: function () {
-    this.props.collections.todos.off(null, null, this);
+    TodosStore.off(null, null, this);
   },
   render: function () {
-    var list = this.props.collections.todos.map(function (item) {
+    var list = TodosStore.map(function (item) {
       return <ItemComponent key={item.get('id')} model={item} />;
     });
     return (

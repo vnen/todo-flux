@@ -1,9 +1,8 @@
 var Backbone = require('backbone'),
     Route = require('../../lib/route'),
     HomeComponent = require('../components/home.jsx'),
-    ListComponent = require('../components/todos/list.jsx'),
-    ErrorComponents = require('../components/errors'),
-    TodosCollection = require('../collections/todos');
+    TodosListComponent = require('../components/todos/list.jsx'),
+    ErrorComponents = require('../components/errors');
 
 module.exports = Backbone.Router.extend({
   initialize: function () {
@@ -23,9 +22,7 @@ module.exports = Backbone.Router.extend({
     return new Route(HomeComponent);
   },
   list: function () {
-    return new Route(ListComponent, {
-      todos: TodosCollection
-    });
+    return new Route(TodosListComponent);
   },
   notFound: function () {
     var route = new Route(ErrorComponents.Error404Component);
