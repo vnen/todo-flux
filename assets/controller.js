@@ -33,13 +33,14 @@ module.exports = {
 
   bootstrap: function (route, callback) {
     var data = {};
-    if (!route.collections || _.size(route.collections === 0)) {
+    if (!route.stores || _.size(route.stores) === 0) {
       callback(null, data);
     }
     var err = null, after = _.after(_.size(route.collections), function () {
       callback(err, data);
     });
-    _.each(route.collections, function (collection) {
+    _.each(route.stores, function (name) {
+      var collection = require('./stores/' + name);
       collection.fetch({
         success: function () {
           var name = collection.name;
