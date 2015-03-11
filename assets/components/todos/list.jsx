@@ -36,7 +36,7 @@ ItemComponent = React.createClass({
     var attr = this.props.model.attributes;
     var errStyle = { color: 'red' };
     return (
-      <li>
+      <li key={attr.id}>
         <input type="checkbox" checked={this.state.done} ref='done' onChange={this.onChange} /> {attr.task}
         <button type="button" onClick={this.delete}>Delete</button>
         <span style={errStyle}>{this.state.errorText}</span>
@@ -64,8 +64,8 @@ ListComponent = React.createClass({
     return (
       <main>
         <h1>List of todos</h1>
-          {list}
         <ul>
+          {list}
         </ul>
       </main>
     );
