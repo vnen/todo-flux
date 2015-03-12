@@ -53,12 +53,12 @@ describe('Main router', function () {
 
     it('should call home if no route', function () {
       loadRoute('');
-      expect(this.mainRouter.home).to.have.been.calledOnce;
+      expect(this.mainRouter.home).to.have.been.called;
     });
 
     it('should call home if path is "/"', function () {
       loadRoute('/');
-      expect(this.mainRouter.home).to.have.been.calledOnce;
+      expect(this.mainRouter.home).to.have.been.called;
     });
   });
 });
