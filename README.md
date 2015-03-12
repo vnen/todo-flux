@@ -1,5 +1,7 @@
 # Todo Flux
 
+**Note: this won't be developed further (unless I decide to). Feel free to copy and use the concepts presented here.**
+
 A sample todo (kinda like [TodoMVC](http://todomvc.com/)) webapp in isomorphic Javascript made with React.js, Backbone.js and Flux architecture.
 
 Ispired by: http://jsforallof.us/2015/02/23/isomorphic-web-apps-and-react-js/
